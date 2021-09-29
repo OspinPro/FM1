@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Diagram: Decision Tree</title>
+		<meta
+			name="viewport"
+			content="initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no"
+		/>
+
+		<!-- Webix Library -->
+		<script type="text/javascript" src="../../codebase/webix/webix.js"></script>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="../../codebase/webix/webix.css"
+		/>
+
+		<!-- Diagram -->
+		<script type="text/javascript" src="../../codebase/diagram.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../codebase/diagram.css" />
+
+		<script src="data/tree.js"></script>
+		<style>
+			.bold {
+				font-size: 14px;
+				color: #333;
+				font-weight: 500;
+			}
+			.expected {
+				border-width: 0 0 0 1px;
+			}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			webix.ready(function() {
+				if (!webix.env.touch && webix.env.scrollSize) webix.CustomScroll.init();
+
+				const diagram = {
+					view: "diagram",
+					id: "diagram",
+					autoplace: false,
+					item: {
+						width: 120,
+						height: 50,
+						template: obj => {
+							if (obj.$css == "expected")
+								return (
+									"Expected value <br><span class='bold'>" +
+									obj.value +
+									"</span>"
+								);
+							if (obj.value)
+								return (
+									obj.value +
+									(obj.percent
+										? " <span class='bold'>" + obj.percent + "%</span>"
+										: "")
+								);
+							return "";
+						},
+					},
+					shapes: [
+						{
+							id: "process",
+							backgroundColor: "#facddc",
+							lineColor: "#facddc",
+							fontSize: 13,
+						},
+						{
+							id: "start",
+							backgroundColor: "#BFC5E6",
+							lineColor: "#BFC5E6",
+							fontSize: 13,
+							width: 165,
+							height: 50,
+						},
+					],
+					data: data,
+					links: links,
+				};
+
+				const toolbar = {
+					view: "toolbar",
+					padding: webix.skin.$active.layoutPadding.space,
+					elements: [
+						{},
+						{
+							view: "button",
+							value: "Edit",
+							autowidth: true,
+							css: "webix_primary",
+							click: function() {
+								const diagram = $$("diagram");
+								// blocks, links, shapes, defaults for blocks and links
+								const full_data = diagram.serialize(true);
+
+								$$("editor").show();
+								$$("editor").setValues(full_data);
+							},
+						},
+					],
+				};
+
+				const editor = {
+					view: "diagram-editor",
+					id: "editor",
+					save: () => {
+						const diagram = $$("diagram");
+
+						// clear data
+						diagram.clearAll();
+						diagram.getLinks().clearAll();
+
+						// blocks, links, shapes, defaults for blocks and links
+						const full_data = $$("editor").getValues();
+						diagram.parse(full_data);
+
+						$$("view").show();
+					},
+				};
+
+				webix.ui({
+					animate: false,
+					cells: [
+						{
+							id: "view",
+							rows: [toolbar, diagram],
+						},
+						editor,
+					],
+				});
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Diagram: Built-in Block Styles</title>
+		<meta
+			name="viewport"
+			content="initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no"
+		/>
+
+		<!-- Webix Library -->
+		<script type="text/javascript" src="../../codebase/webix/webix.js"></script>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="../../codebase/webix/webix.css"
+		/>
+
+		<!-- Diagram -->
+		<script type="text/javascript" src="../../codebase/diagram.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../codebase/diagram.css" />
+
+		<script src="../common/data.js"></script>
+		<style>
+			.master {
+				border-color: orange;
+			}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			webix.ready(function() {
+				if (!webix.env.touch && webix.env.scrollSize) webix.CustomScroll.init();
+
+				webix.ui({
+					padding: { left: 20 },
+					cols: [
+						{
+							width: 650,
+							rows: [
+								{
+									type: "form",
+									borderless: true,
+									cols: [
+										{
+											view: "label",
+											label: "Presets for block styling: 'org' and 'text'",
+										},
+									],
+								},
+								{
+									view: "diagram",
+									autoplace: false,
+									linkItem: {
+										mode: "direct",
+									},
+									item: {
+										width: 100,
+										height: 50,
+									},
+									select: true,
+									data: webix_widgets,
+									links: widget_links,
+								},
+							],
+						},
+						{},
+					],
+				});
+			});
+		</script>
+	</body>
+</html>
