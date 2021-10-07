@@ -95,6 +95,17 @@ a:hover {
     width: 32px;
     height: 32px;
     border-radius: 100%;
+    float: left;
+    margin-right: 10px;
+    margin-top: 3px;
+}
+.ge-avatar-box__images div {
+    min-width: 150px;
+}
+.ge-avatar-box__images div span {
+    display: block;
+    font-weight: bold;
+    margin-top: -3px;
 }
 .ge-avatar-dropdown {
     display: none;
@@ -154,16 +165,16 @@ a:hover {
 
 
 .ge-footer {
-    background: var(--color-1);
-    height: 60px;
-    color: var(--color-2);
     text-align: center;
-    line-height: 60px;
+    line-height: 30px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-top: 1px solid var(--color-3);
 }
 
 .ge-main {
     display: flex;
-    height: calc(100vh - 132px);
     margin-bottom: 10px;
     justify-content: space-between;
 }
@@ -180,7 +191,6 @@ a:hover {
     background: var(--color-2);
     width: calc(100% - 310px);
     box-shadow: 0 0 1px rgba(0,0,0,.9);
-    overflow-y: auto;
 }
 
 .ge-tree__inner {
@@ -207,11 +217,16 @@ a:hover {
     list-style: none;
     margin: 0 0 3px;
     position: relative;
+    border-bottom: 1px solid var(--color-4);
+}
+.ge-list li:last-child {
+    border:none
 }
 .ge-list li > a {
     text-decoration: none;
     color: var(--color-1);
     display: block;
+    line-height: 2;
 }
 .ge-list li .webix_icon {
     position: absolute;
@@ -228,6 +243,8 @@ a:hover {
 .ge-list li.ge-active a,
 .ge-list li a:hover {
     background: var(--color-4);
+    border-left: 4px solid var(--color-4);
+    padding-left: 16px;
 }
 
 .ge-space {
@@ -283,7 +300,13 @@ a:hover {
 }
 
 
-.ge-table {border-collapse: collapse;width: 100%;}
+.ge-table-box {
+    overflow-y: auto;
+    height: calc(100vh - 194px);
+}
+.ge-table {
+    border-collapse: collapse;width: 100%;
+}
 .ge-table thead th {
     border-bottom: 1px solid var(--color-3);
     border-left: 1px solid var(--color-4);
